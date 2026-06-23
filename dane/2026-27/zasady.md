@@ -20,7 +20,8 @@
 
 ## Przedmioty
 
-- Przedmioty caloroczne: j_polski, matematyka, fizyka, angielski1, angielski2, wf
+- Przedmioty caloroczne: j_polski, matematyka, fizyka, angielski1, angielski2, wf, filozofia, etyka, artystyczne, wychowawcza
+- Przedmioty caloroczne tylko kl12: matura_mat, matura_pol
 - Przedmioty epokowe (kl9-11): historia, biologia, chemia, informatyka, geografia, edukacja_obyw, edb, biz
 - 10 przedmiotow rozszerzonych (do wyboru 1-3)
 - 4 jezyki obce (do wyboru 1)
@@ -48,7 +49,9 @@
 
 ## System epok (kl9-11)
 
-Przedmioty epokowe sa nauczane w 4-tygodniowych blokach. W danej epoce klasa ma tylko jeden przedmiot epokowy.
+Przedmioty epokowe sa nauczane w 4-tygodniowych blokach. W danej epoce klasa ma tylko jeden przedmiot epokowy. 
+Przedmiot epokowy jest uczony przez tego samego nauczyciela w tym samym bloku.
+Najlepiej jesli przedmiot epokowy odbywa sie o tej samej porze. 
 Klasa 12 nie uczestniczy w systemie epok.
 
 | Okres | kl9 | kl10 | kl11 |
@@ -71,24 +74,17 @@ Klasa 12 nie uczestniczy w systemie epok.
 - Dni nauki: poniedzialek - piatek
 - Uwzglednic ograniczenia dostepnosci nauczycieli (patrz nauczyciele.md)
 
-## Optymalizacja (miekkie - priorytet od najwazniejszego)
+## Optymalizacja (miekkie - wczytywane przez solver)
 
-### 1. Godzina startu
-- Lekcje zaczynaja sie od lekcji 1 (8:15)
-- Lekcja 0 (7:25) tylko w wyjatkowych sytuacjach, gdy nie da sie ulozyc planu inaczej
+Solver wczytuje ponizsze reguly i ich wagi. Waga okresla priorytet (wyzsza = wazniejsza).
+Waga 0 = regula wylaczona. Mozna dodawac nowe reguly jesli solver je wspiera.
 
-### 2. Brak okienek dla uczniow
-- Lekcje uczniow powinna byc w jednym ciagu (bez przerw miedzy lekcjami)
-- Jesli uczen ma 6 lekcji, to musza byc np. 1-6, nie 1-3 i 5-7
-- Najlepiej by ucziowie konczyli lekcje jak najszybciej
-- Lekcje wymagajacd np. matematyka, fizyka, informatyka, chemia i biologia najlepiej by byly we wczesnych porach.
-- Jesli jest ciag lekcji wymagajacych, to po nich dawaj lekcje lzejsze takie jak sztuka.
-
-### 3. Minimalizacja okienek nauczycieli
-- Nauczyciele powinni miec jak najmniej pustych godzin miedzy lekcjami
-- Lekcje nauczyciela danego dnia powinny byc w spojnym bloku
-
-### 4. Kompaktowy plan nauczycieli
-- Nauczyciele powinni miec lekcje skoncentrowane w jak najmniejszej liczbie dni
-- Unikac sytuacji, gdy nauczyciel przychodzi na 1 lekcje w danym dniu
-- Jesli nauczyciel ma malo godzin, lepiej ulozyc je w 2-3 dni niz rozrzucac na 5 dni
+| ID | Opis | Waga |
+|----|------|------|
+| unikaj_slot0 | Lekcje zaczynaja sie od lekcji 1 (8:15). Lekcja 0 (7:25) tylko wyjatkowo. | 100 |
+| brak_okienek_uczniow | Lekcje uczniow w jednym ciagu bez przerw. Jesli uczen ma 6 lekcji to np. 1-6, nie 1-3 i 5-7. | 50 |
+| wczesne_konczenie | Uczniowie koncza lekcje jak najwczesniej. | 30 |
+| trudne_wczesniej | Przedmioty wymagajace (matematyka, fizyka, informatyka, chemia, biologia) we wczesnych godzinach. Po nich lzejsze (wf, sztuka). | 25 |
+| min_okienek_nauczycieli | Lekcje nauczyciela danego dnia w spojnym bloku, bez pustych godzin miedzy lekcjami. | 20 |
+| kompaktowy_plan | Nauczyciele w najmniejszej liczbie dni. Jesli malo godzin, lepiej 2-3 dni niz 5. | 10 |
+| unikaj_pojedynczych | Unikaj sytuacji gdy nauczyciel przychodzi na 1 lekcje w dniu. | 5 |

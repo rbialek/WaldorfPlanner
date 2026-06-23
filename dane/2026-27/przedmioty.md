@@ -10,6 +10,15 @@
 | angielski1 | Jezyk angielski (grupa rozszerzona) | n8 (Agnieszka Kozlowska) | 9, 10, 11, 12 |
 | angielski2 | Jezyk angielski (grupa podstawowa) | n8 (Agnieszka Kozlowska) | 9, 10, 11, 12 |
 | wf | Wychowanie fizyczne | n9 (Robert Jankowski) | 9, 10, 11, 12 |
+| filozofia | Filozofia | n3 (Piotr Wisniewski) | 9, 10, 11 |
+| etyka | Etyka | n3 (Piotr Wisniewski) | 9, 10, 11, 12 |
+| artystyczne | Zajecia artystyczne | n12 (Katarzyna Piotrowska) | 9, 10, 11, 12 |
+| wychowawcza_kl9 | Godzina wychowawcza | n2 (Anna Nowak) | 9 |
+| wychowawcza_kl10 | Godzina wychowawcza | n6 (Ewa Szymanska) | 10 |
+| wychowawcza_kl11 | Godzina wychowawcza | n4 (Maria Kaminska) | 11 |
+| wychowawcza_kl12 | Godzina wychowawcza | n11 (Andrzej Krawczyk) | 12 |
+| matura_mat | Matura matematyka | n1 (Jan Kowalski), n11 (Andrzej Krawczyk) | 12 |
+| matura_pol | Matura jezyk polski | n12 (Katarzyna Piotrowska) | 12 |
 
 ## Przedmioty epokowe (kl9-11, nauczane w 4-tygodniowych blokach)
 

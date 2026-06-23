@@ -17,6 +17,15 @@
 | angielski2 | n8 (Agnieszka Kozlowska) | 3 | 3 | 3 | 3 | 12 |
 | wf | n9 (Robert Jankowski) | 3 | 3 | 3 | 3 | 12 |
 | geografia | n10 (Magdalena Mazur) | 2 | 1 | 1 | 1 | 5 |
+| filozofia | n3 (Piotr Wisniewski) | 1 | 1 | 1 | 0 | 3 |
+| etyka | n3 (Piotr Wisniewski) | 1 | 1 | 1 | 1 | 4 |
+| artystyczne | n12 (Katarzyna Piotrowska) | 2 | 1 | 1 | 1 | 5 |
+| wychowawcza_kl9 | n2 (Anna Nowak) | 1 | 0 | 0 | 0 | 1 |
+| wychowawcza_kl10 | n6 (Ewa Szymanska) | 0 | 1 | 0 | 0 | 1 |
+| wychowawcza_kl11 | n4 (Maria Kaminska) | 0 | 0 | 1 | 0 | 1 |
+| wychowawcza_kl12 | n11 (Andrzej Krawczyk) | 0 | 0 | 0 | 1 | 1 |
+| matura_mat | n1 (Jan Kowalski) | 0 | 0 | 0 | 1 | 1 |
+| matura_pol | n12 (Katarzyna Piotrowska) | 0 | 0 | 0 | 1 | 1 |
 
 ## Przedmioty rozszerzone
 
@@ -31,10 +40,10 @@
 
 | Klasa | Standardowe | Rozszerzone (max) | Razem (max) |
 |-------|-------------|-------------------|-------------|
-| kl9 | 28 | 6 | 34 |
-| kl10 | 25 | 6 | 31 |
-| kl11 | 26 | 6 | 32 |
-| kl12 | 25 | 6 | 31 |
+| kl9 | 33 | 6 | 39 |
+| kl10 | 29 | 6 | 35 |
+| kl11 | 30 | 6 | 36 |
+| kl12 | 30 | 6 | 36 |
 
 Uwaga: angielski1 i angielski2 odbywaja sie rownolegle (ten sam slot) - uczen uczestniczy tylko w swojej grupie.
 
@@ -42,9 +51,9 @@ Uwaga: angielski1 i angielski2 odbywaja sie rownolegle (ten sam slot) - uczen uc
 
 | Nauczyciel | Standardowe | Rozszerzone | Razem |
 |------------|-------------|-------------|-------|
-| n1 (Jan Kowalski) | 8 | 4 | 12 |
+| n1 (Jan Kowalski) | 9 | 4 | 13 |
 | n2 (Anna Nowak) | 8 | 0 | 8 |
-| n3 (Piotr Wisniewski) | 8 | 0 | 8 |
+| n3 (Piotr Wisniewski) | 15 | 0 | 15 |
 | n4 (Maria Kaminska) | 7 | 0 | 7 |
 | n5 (Tomasz Zielinski) | 6 | 8 | 14 |
 | n6 (Ewa Szymanska) | 8 | 0 | 8 |
@@ -53,4 +62,4 @@ Uwaga: angielski1 i angielski2 odbywaja sie rownolegle (ten sam slot) - uczen uc
 | n9 (Robert Jankowski) | 12 | 0 | 12 |
 | n10 (Magdalena Mazur) | 5 | 0 | 5 |
 | n11 (Andrzej Krawczyk) | 8 | 4 | 12 |
-| n12 (Katarzyna Piotrowska) | 8 | 0 | 8 |
+| n12 (Katarzyna Piotrowska) | 14 | 0 | 14 |
