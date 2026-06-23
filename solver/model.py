@@ -126,8 +126,11 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
         model.add(sum(total) == hours)
 
     # C5: Max lessons per day per class
+    # For epoch classes, 2 slots (l_glowna) are added post-solve, so limit is max - 2
     for cls_id in class_ids:
         cls_indices = [idx for idx, (k, _, _, _) in enumerate(assignments) if k == cls_id]
+        epoch_reserve = 2 if cls_id in data.rules.epoch_classes else 0
+        effective_max = data.rules.max_lessons_per_day - epoch_reserve
         for d in days:
             day_vars = []
             for s in all_slots:
@@ -137,7 +140,7 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
                 for gi, lg in enumerate(data.language_groups):
                     if cls_id in set(st.class_id for st in lg.students):
                         day_vars.append(lang_lesson[gi, d, s])
-            model.add(sum(day_vars) <= data.rules.max_lessons_per_day)
+            model.add(sum(day_vars) <= effective_max)
 
     # C6: English groups - angielski1 and angielski2 for same class must be in different slots
     # (n8 teaches both, can't be simultaneous)
@@ -254,9 +257,9 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
                     if cls_id in set(st.class_id for st in lg.students):
                         model.add(lang_lesson[gi, d, s] == 0)
 
-    # --- Build optimization (Faza 3 will expand this) ---
-    # For now, just use a basic objective
-    _add_optimization(model, data, lesson, lang_lesson, assignments, class_ids, days, all_slots)
+    # CP-SAT only enforces hard constraints (feasibility).
+    # Soft optimization is handled by evaluate_schedule() from constraints.py,
+    # which is the single source of truth used by both GA and CP-SAT scoring.
 
     # --- Solve ---
     solver = cp_model.CpSolver()
@@ -296,144 +299,10 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
         "language_slots": lang_result,
         "assignments": assignments,
         "status": "OPTIMAL" if status == cp_model.OPTIMAL else "FEASIBLE",
-        "objective": solver.objective_value,
+        "objective": 0,  # No internal objective; use evaluate_schedule() for scoring
     }
 
 
-def _add_optimization(
-    model: cp_model.CpModel,
-    data: SchoolData,
-    lesson: dict,
-    lang_lesson: dict,
-    assignments: list,
-    class_ids: list[str],
-    days: list[str],
-    all_slots: list[int],
-):
-    """Add soft constraints based on optimization rules from zasady.md."""
-    opt_rules = {r.id: r.weight for r in data.rules.optimization}
-    max_slot = max(all_slots)
-    objective_terms = []
-
-    # Helper: class_active[k, d, s] = has any lesson
-    class_active = {}
-    for cls_id in class_ids:
-        cls_indices = [idx for idx, (k, _, _, _) in enumerate(assignments) if k == cls_id]
-        for d in days:
-            for s in all_slots:
-                ca = model.new_bool_var(f"ca_{cls_id}_{d}_{s}")
-                lesson_vars = [lesson[cls_id, d, s, idx] for idx in cls_indices]
-                # Add lang vars
-                for gi, lg in enumerate(data.language_groups):
-                    if cls_id in set(st.class_id for st in lg.students):
-                        lesson_vars.append(lang_lesson[gi, d, s])
-                model.add_max_equality(ca, lesson_vars + [model.new_constant(0)])
-                class_active[cls_id, d, s] = ca
-
-    # O1: unikaj_slot0
-    w = opt_rules.get("unikaj_slot0", 0)
-    if w > 0 and 0 in all_slots:
-        for cls_id in class_ids:
-            for d in days:
-                objective_terms.append(w * class_active[cls_id, d, 0])
-
-    # O2: brak_okienek_uczniow - penalize gaps in class schedule
-    w = opt_rules.get("brak_okienek_uczniow", 0)
-    if w > 0:
-        for cls_id in class_ids:
-            for d in days:
-                # Gap at slot s: class_active at s-1 and s+1 but not s
-                for s in all_slots:
-                    if s == 0 or s == max_slot:
-                        continue
-                    if s - 1 not in all_slots or s + 1 not in all_slots:
-                        continue
-                    gap = model.new_bool_var(f"gap_{cls_id}_{d}_{s}")
-                    # gap = 1 if active[s-1]=1 AND active[s]=0 AND active[s+1]=1
-                    model.add(class_active[cls_id, d, s - 1] == 1).only_enforce_if(gap)
-                    model.add(class_active[cls_id, d, s] == 0).only_enforce_if(gap)
-                    model.add(class_active[cls_id, d, s + 1] == 1).only_enforce_if(gap)
-                    objective_terms.append(w * gap)
-
-    # O3: wczesne_konczenie - penalize late lessons
-    w = opt_rules.get("wczesne_konczenie", 0)
-    if w > 0:
-        for cls_id in class_ids:
-            for d in days:
-                for s in all_slots:
-                    # Higher penalty for later slots
-                    if s >= 5:
-                        objective_terms.append(w * (s - 4) * class_active[cls_id, d, s])
-
-    # O5: min_okienek_nauczycieli
-    w = opt_rules.get("min_okienek_nauczycieli", 0)
-    if w > 0:
-        # Build teacher_active
-        teacher_active = {}
-        for t in data.teachers:
-            for d in days:
-                for s in all_slots:
-                    vars_list = []
-                    for idx, (cls_id, subj, teacher, hours) in enumerate(assignments):
-                        if teacher == t.id:
-                            vars_list.append(lesson[cls_id, d, s, idx])
-                    for gi, lg in enumerate(data.language_groups):
-                        if lg.teacher == t.id:
-                            vars_list.append(lang_lesson[gi, d, s])
-                    if vars_list:
-                        ta = model.new_bool_var(f"ta_{t.id}_{d}_{s}")
-                        model.add_max_equality(ta, vars_list + [model.new_constant(0)])
-                        teacher_active[t.id, d, s] = ta
-
-        # Penalize teacher gaps
-        for t in data.teachers:
-            for d in days:
-                for s in all_slots:
-                    if s == 0 or s == max_slot:
-                        continue
-                    if (t.id, d, s - 1) not in teacher_active:
-                        continue
-                    if (t.id, d, s) not in teacher_active:
-                        continue
-                    if (t.id, d, s + 1) not in teacher_active:
-                        continue
-                    gap = model.new_bool_var(f"tgap_{t.id}_{d}_{s}")
-                    model.add(teacher_active[t.id, d, s - 1] == 1).only_enforce_if(gap)
-                    model.add(teacher_active[t.id, d, s] == 0).only_enforce_if(gap)
-                    model.add(teacher_active[t.id, d, s + 1] == 1).only_enforce_if(gap)
-                    objective_terms.append(w * gap)
-
-    # O6: kompaktowy_plan - minimize number of days teacher works
-    w = opt_rules.get("kompaktowy_plan", 0)
-    if w > 0:
-        for t in data.teachers:
-            for d in days:
-                day_active = model.new_bool_var(f"tday_{t.id}_{d}")
-                day_vars = []
-                for s in all_slots:
-                    if (t.id, d, s) in teacher_active:
-                        day_vars.append(teacher_active[t.id, d, s])
-                if day_vars:
-                    model.add_max_equality(day_active, day_vars + [model.new_constant(0)])
-                    objective_terms.append(w * day_active)
-
-    # O7: unikaj_pojedynczych - penalize days with only 1 lesson for a teacher
-    w = opt_rules.get("unikaj_pojedynczych", 0)
-    if w > 0:
-        for t in data.teachers:
-            for d in days:
-                day_vars = []
-                for s in all_slots:
-                    if (t.id, d, s) in teacher_active:
-                        day_vars.append(teacher_active[t.id, d, s])
-                if day_vars:
-                    day_sum = model.new_int_var(0, len(all_slots), f"tsum_{t.id}_{d}")
-                    model.add(day_sum == sum(day_vars))
-                    single = model.new_bool_var(f"tsingle_{t.id}_{d}")
-                    model.add(day_sum == 1).only_enforce_if(single)
-                    model.add(day_sum != 1).only_enforce_if(single.negated())
-                    objective_terms.append(w * single)
-
-    # Set objective
-    if objective_terms:
-        model.minimize(sum(objective_terms))
+    # _add_optimization removed: soft constraints are now handled exclusively
+    # by constraints.py evaluate_schedule(), the single source of truth for
+    # both GA and CP-SAT scoring.

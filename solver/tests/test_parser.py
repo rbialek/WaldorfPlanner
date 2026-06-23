@@ -310,14 +310,14 @@ class TestParseRules:
 
     def test_optimization_ids(self, school_data):
         opt_ids = [r.id for r in school_data.rules.optimization]
-        assert "unikaj_slot0" in opt_ids
-        assert "brak_okienek_uczniow" in opt_ids
-        assert "kompaktowy_plan" in opt_ids
+        assert "avoid_slot0" in opt_ids
+        assert "no_student_gaps" in opt_ids
+        assert "compact_teacher_schedule" in opt_ids
 
     def test_optimization_weights(self, school_data):
-        slot0 = next(r for r in school_data.rules.optimization if r.id == "unikaj_slot0")
+        slot0 = next(r for r in school_data.rules.optimization if r.id == "avoid_slot0")
         assert slot0.weight == 100
-        compact = next(r for r in school_data.rules.optimization if r.id == "kompaktowy_plan")
+        compact = next(r for r in school_data.rules.optimization if r.id == "compact_teacher_schedule")
         assert compact.weight == 10
 
     def test_optimization_has_descriptions(self, school_data):

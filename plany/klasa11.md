@@ -8,16 +8,16 @@ Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok
 
 |  | Poniedzialek | Wtorek | Sroda | Czwartek | Piatek |
 |--|---|---|---|---|---|
-| 0 (7:25 - 8:10) | angielski2 (Kozlowska) | chemia_roz (Zielinski) | j_polski (Piotrowska) | matematyka_roz (Krawczyk) | filozofia (Wisniewski) |
+| 0 (7:25 - 8:10) | angielski2 (Kozlowska) | matematyka_roz (Krawczyk) | j_polski (Piotrowska) | wf (Jankowski) | angielski2 (Kozlowska) |
 | 1 (8:15 - 9:00) | l. glowna | l. glowna | l. glowna | l. glowna | l. glowna |
 | 2 (9:10 - 9:55) | l. glowna | l. glowna | l. glowna | l. glowna | l. glowna |
-| 3 (10:10 - 10:55) | wychowawcza_kl11 (Kaminska) | fizyka (Szymanska) | j_polski (Piotrowska) | angielski2 (Kozlowska) | wf (Jankowski) |
-| 4 (11:05 - 11:50) | j_niemiecki 11,10,12 | j_polski (Piotrowska) | fizyka (Szymanska) | angielski1 (Kozlowska) | etyka (Wisniewski) |
-| 5 (12:10 - 12:55) | j_niemiecki 11,10,12 | j_rosyjski 11,12 | angielski1 (Kozlowska) | angielski1 (Kozlowska) | wf (Jankowski) |
-| 6 (13:05 - 13:50) | j_hiszpanski 11,10,12,9 | j_rosyjski 11,12 | wf (Jankowski) | angielski2 (Kozlowska) | informatyka_roz (Wojcik) |
-| 7 (14:00 - 14:45) | j_hiszpanski 11,10,12,9 | chemia_roz (Zielinski) | j_polski (Piotrowska) | matematyka_roz (Krawczyk) | informatyka_roz (Wojcik) |
-| 8 (14:55 - 15:40) | - | artystyczne (Piotrowska) | - | - | - |
-| 9 (15:45 - 16:30) | - | - | - | - | - |
+| 3 (10:10 - 10:55) | - | angielski1 (Kozlowska) | chemia_roz (Zielinski) | - | - |
+| 4 (11:05 - 11:50) | wychowawcza_kl11 (Kaminska) | j_polski (Piotrowska) | matematyka_roz (Krawczyk) | filozofia (Wisniewski) | j_rosyjski 11,12 |
+| 5 (12:10 - 12:55) | - | - | wf (Jankowski) | j_polski (Piotrowska) | j_rosyjski 11,12 |
+| 6 (13:05 - 13:50) | fizyka (Szymanska) | chemia_roz (Zielinski) | - | j_niemiecki 11,10,12 | etyka (Wisniewski) |
+| 7 (14:00 - 14:45) | angielski2 (Kozlowska) | j_polski (Piotrowska) | - | j_niemiecki 11,10,12 | artystyczne (Piotrowska) |
+| 8 (14:55 - 15:40) | wf (Jankowski) | angielski1 (Kozlowska) | fizyka (Szymanska) | j_hiszpanski 11,10,12,9 | - |
+| 9 (15:45 - 16:30) | - | angielski1 (Kozlowska) | informatyka_roz (Wojcik) | j_hiszpanski 11,10,12,9 | informatyka_roz (Wojcik) |
 
 ## Plan epok
 
@@ -35,10 +35,10 @@ Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok
 
 ## Grupy angielskiego
 
-**angielski1** (9 ucz., sloty: cz/4, cz/5, sr/5):
+**angielski1** (9 ucz., sloty: wt/3, wt/8, wt/9):
   Maria Banys, Magdalena Dzialo, Maria Jaworska, Milena Koloczek, Tymoteusz Kumkowski, Wiktor Kus, Justyna Martyniak, Kinga Paterkowska, Bartlomiej Tomiak
 
-**angielski2** (9 ucz., sloty: cz/3, cz/6, pn/0):
+**angielski2** (9 ucz., sloty: pn/0, pn/7, pt/0):
   Sara Bialek, Pola Lodziana, Antoni Matusiak, Oliwia Roztocka, Anna Szymkow, Natasza Waclawek, Hanna Wieczorek, Maja Wrobel, Tymon Zboralski
 
 ## Rozszerzenia uczniow
@@ -56,7 +56,7 @@ Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok
 
 ## Jezyki obce
 
-- **j_hiszpanski** (13 ucz., sloty: pn/6, pn/7): Maria Banys, Sara Bialek, Magdalena Dzialo, Maria Jaworska, Wiktor Kus, Justyna Martyniak, Antoni Matusiak, Kinga Paterkowska, Oliwia Roztocka, Anna Szymkow, Hanna Wieczorek, Maja Wrobel, Tymon Zboralski
-- **j_niemiecki** (1 ucz., sloty: pn/4, pn/5): Natasza Waclawek
-- **j_rosyjski** (2 ucz., sloty: wt/5, wt/6): Milena Koloczek, Tymoteusz Kumkowski
+- **j_hiszpanski** (13 ucz., sloty: cz/8, cz/9): Maria Banys, Sara Bialek, Magdalena Dzialo, Maria Jaworska, Wiktor Kus, Justyna Martyniak, Antoni Matusiak, Kinga Paterkowska, Oliwia Roztocka, Anna Szymkow, Hanna Wieczorek, Maja Wrobel, Tymon Zboralski
+- **j_niemiecki** (1 ucz., sloty: cz/6, cz/7): Natasza Waclawek
+- **j_rosyjski** (2 ucz., sloty: pt/4, pt/5): Milena Koloczek, Tymoteusz Kumkowski
 - **ZW** (zwolnieni): Pola Lodziana, Bartlomiej Tomiak

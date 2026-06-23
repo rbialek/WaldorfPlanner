@@ -11,7 +11,7 @@
 | 0 (7:25 - 8:10) | - | - | - | - | - |
 | 1 (8:15 - 9:00) | - | - | - | - | - |
 | 2 (9:10 - 9:55) | - | - | - | - | - |
-| 3 (10:10 - 10:55) | geografia kl12 | - | - | - | - |
+| 3 (10:10 - 10:55) | - | - | - | geografia kl12 | - |
 | 4 (11:05 - 11:50) | - | - | - | - | - |
 | 5 (12:10 - 12:55) | - | - | - | - | - |
 | 6 (13:05 - 13:50) | - | - | - | - | - |
@@ -23,10 +23,10 @@
 
 | Dzien | Lekcja | Przedmiot | Klasa/Grupa | Uczniowie |
 |-------|--------|-----------|-------------|-----------|
-| pn | 3 | geografia | kl12 (cala klasa) | 10 ucz. |
+| cz | 3 | geografia | kl12 (cala klasa) | 10 ucz. |
 
 ## Podsumowanie
 
-- Dni pracy: Poniedzialek
+- Dni pracy: Czwartek
 - Godziny: lekcje 3-3
 - Okienka: 0

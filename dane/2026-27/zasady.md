@@ -81,10 +81,10 @@ Waga 0 = regula wylaczona. Mozna dodawac nowe reguly jesli solver je wspiera.
 
 | ID | Opis | Waga |
 |----|------|------|
-| unikaj_slot0 | Lekcje zaczynaja sie od lekcji 1 (8:15). Lekcja 0 (7:25) tylko wyjatkowo. | 100 |
-| brak_okienek_uczniow | Lekcje uczniow w jednym ciagu bez przerw. Jesli uczen ma 6 lekcji to np. 1-6, nie 1-3 i 5-7. | 50 |
-| wczesne_konczenie | Uczniowie koncza lekcje jak najwczesniej. | 30 |
-| trudne_wczesniej | Przedmioty wymagajace (matematyka, fizyka, informatyka, chemia, biologia) we wczesnych godzinach. Po nich lzejsze (wf, sztuka). | 25 |
-| min_okienek_nauczycieli | Lekcje nauczyciela danego dnia w spojnym bloku, bez pustych godzin miedzy lekcjami. | 20 |
-| kompaktowy_plan | Nauczyciele w najmniejszej liczbie dni. Jesli malo godzin, lepiej 2-3 dni niz 5. | 10 |
-| unikaj_pojedynczych | Unikaj sytuacji gdy nauczyciel przychodzi na 1 lekcje w dniu. | 5 |
+| avoid_slot0 | Lekcje zaczynaja sie od lekcji 1 (8:15). Lekcja 0 (7:25) tylko wyjatkowo. | 100 |
+| no_student_gaps | Lekcje uczniow w jednym ciagu bez przerw. Jesli uczen ma 6 lekcji to np. 1-6, nie 1-3 i 5-7. | 50 |
+| early_finish | Uczniowie koncza lekcje jak najwczesniej. | 30 |
+| demanding_early | Przedmioty wymagajace (matematyka, fizyka, informatyka, chemia, biologia) we wczesnych godzinach. Po nich lzejsze (wf, sztuka). | 25 |
+| no_teacher_gaps | Lekcje nauczyciela danego dnia w spojnym bloku, bez pustych godzin miedzy lekcjami. | 20 |
+| compact_teacher_schedule | Nauczyciele w najmniejszej liczbie dni. Jesli malo godzin, lepiej 2-3 dni niz 5. | 10 |
+| avoid_single_lessons | Unikaj sytuacji gdy nauczyciel przychodzi na 1 lekcje w dniu. | 5 |

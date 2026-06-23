@@ -8,16 +8,16 @@ Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok
 
 |  | Poniedzialek | Wtorek | Sroda | Czwartek | Piatek |
 |--|---|---|---|---|---|
-| 0 (7:25 - 8:10) | - | informatyka_roz (Wojcik) | fizyka (Szymanska) | j_polski (Nowak) | angielski2 (Kozlowska) |
+| 0 (7:25 - 8:10) | wf (Jankowski) | - | angielski1 (Kozlowska) | fizyka (Szymanska) | wf (Jankowski) |
 | 1 (8:15 - 9:00) | l. glowna | l. glowna | l. glowna | l. glowna | l. glowna |
 | 2 (9:10 - 9:55) | l. glowna | l. glowna | l. glowna | l. glowna | l. glowna |
-| 3 (10:10 - 10:55) | etyka (Wisniewski) | chemia_roz (Zielinski) | angielski1 (Kozlowska) | matematyka_roz (Kowalski) | informatyka_roz (Wojcik) |
-| 4 (11:05 - 11:50) | j_niemiecki 10,11,12 | fizyka (Szymanska) | angielski2 (Kozlowska) | j_polski (Nowak) | wf (Jankowski) |
-| 5 (12:10 - 12:55) | j_niemiecki 10,11,12 | j_polski (Nowak) | wychowawcza_kl10 (Szymanska) | matematyka_roz (Kowalski) | filozofia (Wisniewski) |
-| 6 (13:05 - 13:50) | j_hiszpanski 10,11,12,9 | chemia_roz (Zielinski) | angielski1 (Kozlowska) | j_polski (Nowak) | angielski1 (Kozlowska) |
-| 7 (14:00 - 14:45) | j_hiszpanski 10,11,12,9 | artystyczne (Piotrowska) | wf (Jankowski) | angielski2 (Kozlowska) | wf (Jankowski) |
-| 8 (14:55 - 15:40) | - | - | - | - | - |
-| 9 (15:45 - 16:30) | - | - | - | - | - |
+| 3 (10:10 - 10:55) | j_polski (Nowak) | - | angielski2 (Kozlowska) | - | wf (Jankowski) |
+| 4 (11:05 - 11:50) | angielski1 (Kozlowska) | chemia_roz (Zielinski) | chemia_roz (Zielinski) | matematyka_roz (Kowalski) | angielski1 (Kozlowska) |
+| 5 (12:10 - 12:55) | - | fizyka (Szymanska) | etyka (Wisniewski) | j_polski (Nowak) | angielski2 (Kozlowska) |
+| 6 (13:05 - 13:50) | - | j_polski (Nowak) | - | j_niemiecki 10,11,12 | - |
+| 7 (14:00 - 14:45) | matematyka_roz (Kowalski) | angielski2 (Kozlowska) | j_polski (Nowak) | j_niemiecki 10,11,12 | wychowawcza_kl10 (Szymanska) |
+| 8 (14:55 - 15:40) | - | - | informatyka_roz (Wojcik) | j_hiszpanski 10,11,12,9 | informatyka_roz (Wojcik) |
+| 9 (15:45 - 16:30) | artystyczne (Piotrowska) | - | - | j_hiszpanski 10,11,12,9 | filozofia (Wisniewski) |
 
 ## Plan epok
 
@@ -35,10 +35,10 @@ Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok
 
 ## Grupy angielskiego
 
-**angielski1** (9 ucz., sloty: pt/6, sr/3, sr/6):
+**angielski1** (9 ucz., sloty: pn/4, pt/4, sr/0):
   Masza Dzoga, Alicja Kumkowska, Antoni Liana, Matty Morison, Aleksander Rynkiewicz, Antonina Sienkiewicz, Yelizavetta Siunova, Lena Szymczyk, Oliver Mrozek
 
-**angielski2** (8 ucz., sloty: cz/7, pt/0, sr/4):
+**angielski2** (8 ucz., sloty: pt/5, sr/3, wt/7):
   Hanna Bednorz, Sebastian Danysz, Emilia Kubica, Olaf Mencfel, Teodor Naturski, Hanna Samel-Sliwa, Nadia Sokola, Sara Zawanowska
 
 ## Rozszerzenia uczniow
@@ -56,6 +56,6 @@ Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok
 
 ## Jezyki obce
 
-- **j_hiszpanski** (11 ucz., sloty: pn/6, pn/7): Hanna Bednorz, Masza Dzoga, Alicja Kumkowska, Antoni Liana, Matty Morison, Teodor Naturski, Antonina Sienkiewicz, Yelizavetta Siunova, Nadia Sokola, Lena Szymczyk, Sara Zawanowska
-- **j_niemiecki** (5 ucz., sloty: pn/4, pn/5): Sebastian Danysz, Emilia Kubica, Olaf Mencfel, Aleksander Rynkiewicz, Oliver Mrozek
+- **j_hiszpanski** (11 ucz., sloty: cz/8, cz/9): Hanna Bednorz, Masza Dzoga, Alicja Kumkowska, Antoni Liana, Matty Morison, Teodor Naturski, Antonina Sienkiewicz, Yelizavetta Siunova, Nadia Sokola, Lena Szymczyk, Sara Zawanowska
+- **j_niemiecki** (5 ucz., sloty: cz/6, cz/7): Sebastian Danysz, Emilia Kubica, Olaf Mencfel, Aleksander Rynkiewicz, Oliver Mrozek
 - **ZW** (zwolnieni): Hanna Samel-Sliwa
