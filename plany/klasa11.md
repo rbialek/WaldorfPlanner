@@ -4,19 +4,19 @@ Liczba uczniow: 18
 
 ## Tygodniowy plan
 
-Uwaga: przedmioty epokowe oznaczone [EPOKA] zmieniaja sie wg planu epok (patrz zasady.md).
+Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok (patrz zasady.md).
 
 |  | Poniedzialek | Wtorek | Sroda | Czwartek | Piatek |
 |--|---|---|---|---|---|
-| 0 (7:25 - 8:10) | - | [EPOKA] (n1) | j_polski (Piotrowska) | - | chemia_roz (Zielinski) |
-| 1 (8:15 - 9:00) | [EPOKA] (n3) | matematyka_roz (Krawczyk) | j_polski (Piotrowska) | [EPOKA] (n4) | fizyka (Szymanska) |
-| 2 (9:10 - 9:55) | [EPOKA] (n11) | [EPOKA] (n5) | j_hiszpanski (Kozlowska) | angielski1 (Kozlowska) | angielski1 (Kozlowska) |
-| 3 (10:10 - 10:55) | [EPOKA] (n3) | matematyka_roz (Krawczyk) | j_hiszpanski (Kozlowska) | angielski2 (Kozlowska) | angielski2 (Kozlowska) |
-| 4 (11:05 - 11:50) | informatyka_roz (Wojcik) | [EPOKA] (n1) | j_niemiecki (Kozlowska) | wf (Jankowski) | wf (Jankowski) |
-| 5 (12:10 - 12:55) | informatyka_roz (Wojcik) | chemia_roz (Zielinski) | j_niemiecki (Kozlowska) | angielski2 (Kozlowska) | wf (Jankowski) |
-| 6 (13:05 - 13:50) | j_polski (Piotrowska) | [EPOKA] (n11) | j_rosyjski (Piotrowska) | [EPOKA] (n4) | angielski1 (Kozlowska) |
-| 7 (14:00 - 14:45) | j_polski (Piotrowska) | [EPOKA] (n10) | j_rosyjski (Piotrowska) | [EPOKA] (n7) | fizyka (Szymanska) |
-| 8 (14:55 - 15:40) | - | - | - | - | - |
+| 0 (7:25 - 8:10) | angielski2 (Kozlowska) | chemia_roz (Zielinski) | j_polski (Piotrowska) | matematyka_roz (Krawczyk) | filozofia (Wisniewski) |
+| 1 (8:15 - 9:00) | l. glowna | l. glowna | l. glowna | l. glowna | l. glowna |
+| 2 (9:10 - 9:55) | l. glowna | l. glowna | l. glowna | l. glowna | l. glowna |
+| 3 (10:10 - 10:55) | wychowawcza_kl11 (Kaminska) | fizyka (Szymanska) | j_polski (Piotrowska) | angielski2 (Kozlowska) | wf (Jankowski) |
+| 4 (11:05 - 11:50) | j_niemiecki 11,10,12 | j_polski (Piotrowska) | fizyka (Szymanska) | angielski1 (Kozlowska) | etyka (Wisniewski) |
+| 5 (12:10 - 12:55) | j_niemiecki 11,10,12 | j_rosyjski 11,12 | angielski1 (Kozlowska) | angielski1 (Kozlowska) | wf (Jankowski) |
+| 6 (13:05 - 13:50) | j_hiszpanski 11,10,12,9 | j_rosyjski 11,12 | wf (Jankowski) | angielski2 (Kozlowska) | informatyka_roz (Wojcik) |
+| 7 (14:00 - 14:45) | j_hiszpanski 11,10,12,9 | chemia_roz (Zielinski) | j_polski (Piotrowska) | matematyka_roz (Krawczyk) | informatyka_roz (Wojcik) |
+| 8 (14:55 - 15:40) | - | artystyczne (Piotrowska) | - | - | - |
 | 9 (15:45 - 16:30) | - | - | - | - | - |
 
 ## Plan epok
@@ -35,10 +35,10 @@ Uwaga: przedmioty epokowe oznaczone [EPOKA] zmieniaja sie wg planu epok (patrz z
 
 ## Grupy angielskiego
 
-**angielski1** (9 ucz., sloty: cz/2, pt/2, pt/6):
+**angielski1** (9 ucz., sloty: cz/4, cz/5, sr/5):
   Maria Banys, Magdalena Dzialo, Maria Jaworska, Milena Koloczek, Tymoteusz Kumkowski, Wiktor Kus, Justyna Martyniak, Kinga Paterkowska, Bartlomiej Tomiak
 
-**angielski2** (9 ucz., sloty: cz/3, cz/5, pt/3):
+**angielski2** (9 ucz., sloty: cz/3, cz/6, pn/0):
   Sara Bialek, Pola Lodziana, Antoni Matusiak, Oliwia Roztocka, Anna Szymkow, Natasza Waclawek, Hanna Wieczorek, Maja Wrobel, Tymon Zboralski
 
 ## Rozszerzenia uczniow
@@ -56,7 +56,7 @@ Uwaga: przedmioty epokowe oznaczone [EPOKA] zmieniaja sie wg planu epok (patrz z
 
 ## Jezyki obce
 
-- **j_hiszpanski** (13 ucz., sloty: sr/2, sr/3): Maria Banys, Sara Bialek, Magdalena Dzialo, Maria Jaworska, Wiktor Kus, Justyna Martyniak, Antoni Matusiak, Kinga Paterkowska, Oliwia Roztocka, Anna Szymkow, Hanna Wieczorek, Maja Wrobel, Tymon Zboralski
-- **j_niemiecki** (1 ucz., sloty: sr/4, sr/5): Natasza Waclawek
-- **j_rosyjski** (2 ucz., sloty: sr/6, sr/7): Milena Koloczek, Tymoteusz Kumkowski
+- **j_hiszpanski** (13 ucz., sloty: pn/6, pn/7): Maria Banys, Sara Bialek, Magdalena Dzialo, Maria Jaworska, Wiktor Kus, Justyna Martyniak, Antoni Matusiak, Kinga Paterkowska, Oliwia Roztocka, Anna Szymkow, Hanna Wieczorek, Maja Wrobel, Tymon Zboralski
+- **j_niemiecki** (1 ucz., sloty: pn/4, pn/5): Natasza Waclawek
+- **j_rosyjski** (2 ucz., sloty: wt/5, wt/6): Milena Koloczek, Tymoteusz Kumkowski
 - **ZW** (zwolnieni): Pola Lodziana, Bartlomiej Tomiak

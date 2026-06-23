@@ -51,7 +51,7 @@ class TestClassPlansGenerated:
 
     def test_klasa9_has_epoch_info(self, generated_plans):
         content = (OUTPUT_DIR / "klasa9.md").read_text()
-        assert "EPOKA" in content
+        assert "l. glowna" in content
 
     def test_klasa12_no_epoch(self, generated_plans):
         content = (OUTPUT_DIR / "klasa12.md").read_text()
@@ -84,6 +84,24 @@ class TestTeacherPlansGenerated:
         content = (OUTPUT_DIR / "n3_Piotr_Wisniewski.md").read_text()
         assert "Ograniczenia:" in content
         assert "Piatek" in content
+
+
+class TestCombinedPlan:
+    def test_plan_zbiorczy_exists(self, generated_plans):
+        assert (OUTPUT_DIR / "plan_zbiorczy.md").exists()
+
+    def test_has_all_days(self, generated_plans):
+        content = (OUTPUT_DIR / "plan_zbiorczy.md").read_text()
+        for day in ["Poniedzialek", "Wtorek", "Sroda", "Czwartek", "Piatek"]:
+            assert day in content, f"Missing day: {day}"
+
+    def test_has_l_glowna(self, generated_plans):
+        content = (OUTPUT_DIR / "plan_zbiorczy.md").read_text()
+        assert "l. glowna" in content
+
+    def test_has_class_columns(self, generated_plans):
+        content = (OUTPUT_DIR / "plan_zbiorczy.md").read_text()
+        assert "| 9 |" in content or "9 |" in content
 
 
 class TestReportGenerated:

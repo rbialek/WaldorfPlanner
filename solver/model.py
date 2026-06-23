@@ -19,12 +19,21 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
     class_ids = [c.id for c in data.classes]
     teacher_map = {t.id: t for t in data.teachers}
 
+    # --- Identify epoch subjects ---
+    epoch_subject_ids = set()
+    for epoch in data.rules.epochs:
+        for cls_id, subj in epoch.assignments.items():
+            epoch_subject_ids.add(subj)
+
     # --- Build lesson assignments from matrix ---
-    # Each matrix entry defines: subject S taught by teacher T to class K for H hours/week
+    # Exclude epoch subjects for epoch classes (they get fixed "l. glowna" slots 1-2)
     assignments = []  # (class_id, subject, teacher, hours)
     for entry in data.matrix:
         for cls_id, hours in entry.hours.items():
             if hours > 0:
+                # Skip epoch subjects for epoch classes - handled separately
+                if cls_id in data.rules.epoch_classes and entry.subject in epoch_subject_ids:
+                    continue
                 assignments.append((cls_id, entry.subject, entry.teacher, hours))
 
     # Add language group lessons (2h per group, consecutive)
@@ -230,15 +239,20 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
     # teaches the extension to all classes at the same time.
     # The matrix already defines per-class hours for extensions.
 
-    # C9: Epoch constraints
-    # For epoch classes, certain subjects are epoch-based.
-    # The timetable has fixed epoch slots - we mark them as a generic "epoch" assignment.
-    # The actual subject changes per period but the SLOT is fixed.
-    # Epoch subjects in the matrix for kl9-11 should use the same slots.
-    # This is already handled since each epoch subject for each class has its hours
-    # in the matrix, and they rotate by period.
-    # For the timetable, we treat epoch subjects normally - they get their matrix hours.
-    # The generator will mark them as [EPOKA] in the output.
+    # C9: Epoch "l. glowna" - slots 1-2 reserved for epoch classes
+    # Epoch subjects are NOT in assignments (excluded above).
+    # Slots 1 and 2 are completely reserved - no regular assignments there.
+    for cls_id in data.rules.epoch_classes:
+        cls_indices = [idx for idx, (k, _, _, _) in enumerate(assignments) if k == cls_id]
+        for d in days:
+            for s in (1, 2):
+                # Block all regular assignments from slots 1-2
+                for idx in cls_indices:
+                    model.add(lesson[cls_id, d, s, idx] == 0)
+                # Block language lessons from slots 1-2
+                for gi, lg in enumerate(data.language_groups):
+                    if cls_id in set(st.class_id for st in lg.students):
+                        model.add(lang_lesson[gi, d, s] == 0)
 
     # --- Build optimization (Faza 3 will expand this) ---
     # For now, just use a basic objective
@@ -259,6 +273,12 @@ def build_model(data: SchoolData, timeout_seconds: int = 120) -> dict | None:
             for s in all_slots:
                 if solver.value(lesson[cls_id, d, s, idx]):
                     result[cls_id, d, s] = (subj, teacher)
+
+    # Add epoch "l. glowna" slots (fixed, not solved)
+    for cls_id in data.rules.epoch_classes:
+        for d in days:
+            for s in (1, 2):
+                result[cls_id, d, s] = ("l_glowna", "-")
 
     # Extract language group lessons
     lang_result = {}

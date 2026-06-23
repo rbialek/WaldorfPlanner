@@ -41,6 +41,9 @@ def generate_all(data: SchoolData, solution: dict, output_dir: str | Path):
             epoch_subjects, output_dir,
         )
 
+    # Generate combined plan (all classes, one table per day)
+    _generate_combined_plan(data, schedule, teacher_map, slot_times, epoch_subjects, output_dir)
+
     # Generate teacher plans
     for teacher in data.teachers:
         _generate_teacher_plan(
@@ -63,7 +66,7 @@ def _generate_class_plan(
     # Weekly timetable
     lines.append("## Tygodniowy plan\n")
     if cls.id in data.rules.epoch_classes:
-        lines.append("Uwaga: przedmioty epokowe oznaczone [EPOKA] zmieniaja sie wg planu epok (patrz zasady.md).\n")
+        lines.append("Uwaga: 'l. glowna' = lekcja glowna (epoka) - przedmiot zmienia sie wg planu epok (patrz zasady.md).\n")
 
     days = data.rules.days
     all_slots = sorted(set(s[0] for s in data.rules.slots))
@@ -74,6 +77,12 @@ def _generate_class_plan(
     lines.append(header)
     lines.append(separator)
 
+    # Build cross-class lookup: for each (subject, day, slot, teacher), which classes share it
+    cross_class = {}
+    for (k, d, s), (subj, t) in schedule.items():
+        key = (subj, d, s, t)
+        cross_class.setdefault(key, []).append(k)
+
     for s in all_slots:
         time_str = slot_times.get(s, "")
         row = f"| {s} ({time_str}) |"
@@ -83,11 +92,20 @@ def _generate_class_plan(
                 subj, teacher = schedule[key]
                 t_name = teacher_map.get(teacher)
                 t_display = t_name.name.split()[-1] if t_name else teacher
-                # Mark epoch subjects
-                if subj in epoch_subjects and cls.id in data.rules.epoch_classes:
-                    row += f" [EPOKA] ({teacher}) |"
+                # Mark epoch "l. glowna"
+                if subj == "l_glowna":
+                    row += f" l. glowna |"
+                elif subj in epoch_subjects and cls.id in data.rules.epoch_classes:
+                    row += f" l. glowna |"
                 else:
-                    row += f" {subj} ({t_display}) |"
+                    # Check if cross-class (shared slot with other classes)
+                    shared = cross_class.get((subj, d, s, teacher), [])
+                    other_classes = [k for k in shared if k != cls.id]
+                    if other_classes:
+                        class_nums = [cls.id.replace("kl", "")] + [k.replace("kl", "") for k in sorted(other_classes)]
+                        row += f" {subj} {','.join(class_nums)} |"
+                    else:
+                        row += f" {subj} ({t_display}) |"
             else:
                 row += " - |"
         lines.append(row)
@@ -150,6 +168,69 @@ def _generate_class_plan(
 
     content = "\n".join(lines) + "\n"
     filepath = output_dir / f"klasa{class_num}.md"
+    filepath.write_text(content, encoding="utf-8")
+
+
+def _generate_combined_plan(data, schedule, teacher_map, slot_times, epoch_subjects, output_dir):
+    """Generate plany/plan_zbiorczy.md - all classes, one table per day."""
+    lines = ["# Plan lekcji zbiorczy - Rok szkolny 2026/27\n"]
+
+    days = data.rules.days
+    all_slots = sorted(set(s[0] for s in data.rules.slots))
+    class_ids = [c.id for c in data.classes]
+    class_nums = [c.id.replace("kl", "") for c in data.classes]
+
+    # Build cross-class lookup
+    cross_class = {}
+    for (k, d, s), (subj, t) in schedule.items():
+        key = (subj, d, s, t)
+        cross_class.setdefault(key, []).append(k)
+
+    # Language subjects for display
+    lang_subjects = {lg.language for lg in data.language_groups}
+
+    for d in days:
+        lines.append(f"## {DAY_NAMES[d]}\n")
+        header = "|  | " + " | ".join(class_nums) + " |"
+        separator = "|--|" + "|".join("---" for _ in class_ids) + "|"
+        lines.append(header)
+        lines.append(separator)
+
+        for s in all_slots:
+            time_str = slot_times.get(s, "")
+            row = f"| {s}. {time_str} |"
+            for cls_id in class_ids:
+                key = (cls_id, d, s)
+                if key in schedule:
+                    subj, teacher = schedule[key]
+                    if subj == "l_glowna":
+                        row += " l. glowna |"
+                    elif subj in lang_subjects:
+                        # Show language with class numbers
+                        shared = cross_class.get((subj, d, s, teacher), [])
+                        class_nums_shared = ",".join(
+                            k.replace("kl", "") for k in sorted(shared)
+                        )
+                        row += f" {subj} {class_nums_shared} |"
+                    else:
+                        # Check cross-class
+                        shared = cross_class.get((subj, d, s, teacher), [])
+                        other = [k for k in shared if k != cls_id]
+                        if other:
+                            all_shared = sorted([cls_id] + other)
+                            nums = ",".join(k.replace("kl", "") for k in all_shared)
+                            row += f" {subj} {nums} |"
+                        else:
+                            t_name = teacher_map.get(teacher)
+                            t_short = t_name.name.split()[-1] if t_name else teacher
+                            row += f" {subj} ({t_short}) |"
+                else:
+                    row += " |"
+            lines.append(row)
+        lines.append("")
+
+    content = "\n".join(lines) + "\n"
+    filepath = output_dir / "plan_zbiorczy.md"
     filepath.write_text(content, encoding="utf-8")
 
 

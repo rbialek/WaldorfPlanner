@@ -70,7 +70,7 @@ Klasa 12 nie uczestniczy w systemie epok.
 
 - Uczen nie moze miec dwoch lekcji w tym samym czasie
 - Nauczyciel nie moze prowadzic dwoch lekcji w tym samym czasie
-- Maksymalnie 8 lekcji dziennie na klase
+- Maksymalnie 9 lekcji dziennie na klase
 - Dni nauki: poniedzialek - piatek
 - Uwzglednic ograniczenia dostepnosci nauczycieli (patrz nauczyciele.md)
 

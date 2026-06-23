@@ -48,6 +48,11 @@ class TestNoTeacherConflicts:
             subjects_in_slot = set(subj for _, subj in v)
             if len(subjects_in_slot) == 1 and subjects_in_slot.pop() in lang_subjects:
                 continue
+            # l_glowna with placeholder teacher "-" is not a real conflict
+            # (each class has a different epoch teacher per period)
+            teacher_id = k[0]
+            if teacher_id == "-":
+                continue
             conflicts[k] = v
         assert len(conflicts) == 0, f"Teacher conflicts: {conflicts}"
 
@@ -88,10 +93,18 @@ class TestMatrixHours:
     def test_hours_match_matrix(self, solution):
         result, data = solution
         schedule = result["schedule"]
+        # Identify epoch subjects to skip for epoch classes
+        epoch_subjects = set()
+        for epoch in data.rules.epochs:
+            for subj in epoch.assignments.values():
+                epoch_subjects.add(subj)
         mismatches = []
         for entry in data.matrix:
             for cls_id, expected_hours in entry.hours.items():
                 if expected_hours == 0:
+                    continue
+                # Skip epoch subjects for epoch classes (handled as l_glowna)
+                if cls_id in data.rules.epoch_classes and entry.subject in epoch_subjects:
                     continue
                 actual = sum(
                     1 for (k, d, s), (subj, t) in schedule.items()
@@ -121,6 +134,43 @@ class TestMaxLessonsPerDay:
                 assert count <= max_allowed, (
                     f"{cls.id} has {count} lessons on {d}, max is {max_allowed}"
                 )
+
+
+class TestEpochSlots:
+    """C9: l. glowna at slots 1-2 for epoch classes."""
+
+    def test_l_glowna_in_slots_1_2(self, solution):
+        result, data = solution
+        schedule = result["schedule"]
+        for cls_id in data.rules.epoch_classes:
+            for d in data.rules.days:
+                for s in (1, 2):
+                    key = (cls_id, d, s)
+                    assert key in schedule, f"{cls_id} {d}/{s}: missing l. glowna"
+                    assert schedule[key][0] == "l_glowna", (
+                        f"{cls_id} {d}/{s}: expected l_glowna, got {schedule[key][0]}"
+                    )
+
+    def test_slots_1_2_reserved(self, solution):
+        """No regular subjects in epoch slots 1-2 for epoch classes."""
+        result, data = solution
+        schedule = result["schedule"]
+        for cls_id in data.rules.epoch_classes:
+            for d in data.rules.days:
+                for s in (1, 2):
+                    key = (cls_id, d, s)
+                    if key in schedule:
+                        assert schedule[key][0] == "l_glowna", (
+                            f"{cls_id} {d}/{s}: {schedule[key][0]} in epoch slot"
+                        )
+
+    def test_kl12_no_l_glowna(self, solution):
+        """kl12 should NOT have l. glowna (no epochs)."""
+        result, data = solution
+        schedule = result["schedule"]
+        for (cls_id, d, s), (subj, t) in schedule.items():
+            if cls_id == "kl12":
+                assert subj != "l_glowna", f"kl12 has l_glowna at {d}/{s}"
 
 
 class TestEnglishGroups:
